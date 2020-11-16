@@ -23,9 +23,13 @@ export default class Todo extends Component {
 
         addValue: "",
         showInputErrorMessage: false,
+        showNoTodosMessage: false,
 
     };
 
+    /* *************************************************************
+    Add Todo Handles 
+     ************************************************************* */
     handleAddInputChange = (event) => {
         // We also want to make sure that we don't show the input error message when there is a change
         if(this.state.showInputErrorMessage) {
@@ -39,7 +43,7 @@ export default class Todo extends Component {
         });
     };
 
-    handleAddNewTodo = (event) => {
+    handleAddTodo = (event) => {
         // Prevent page from refreshing
         event.preventDefault();
 
@@ -67,12 +71,52 @@ export default class Todo extends Component {
             todoList: newTodoList,
             // We also want to reset the value of the input bar
             addValue: ""
+        },
+        () => {
+            if(this.state.todoList.length > 0) {
+                this.setState({
+                    showNoTodosMessage: false
+                });
+            }
         });
-    }
-    
+
+        console.log("Added todo:", newTodo.todo);
+    };
+
+    /* *************************************************************
+    Delete Todo Handles 
+    ************************************************************* */
+    handleDeleteTodo = (targetID) => {
+        // console.log('Got here');
+        let tempTodoList = [...this.state.todoList];
+        let deletedTodo = '';
+
+        let updatedTodoList = tempTodoList.filter(({ id, todo }) => {
+            if(id === targetID) {
+                deletedTodo = todo;
+            }
+
+            return id !== targetID;
+        });
+
+        this.setState({
+            todoList: updatedTodoList
+        }, 
+        () => {
+            if(this.state.todoList.length === 0) {
+                this.setState({
+                    showNoTodosMessage: true
+                });
+            }
+        });
+
+        console.log("Deleted todo:", deletedTodo);
+    };
+
     render() {
         const { 
             todoList,
+            showNoTodosMessage,
             showInputErrorMessage
         } = this.state;
 
@@ -80,7 +124,7 @@ export default class Todo extends Component {
             <div>
                 {showInputErrorMessage ? (
                     <div>
-                        sorry, i'm drawing a 'blank' in figuring out what you wanna add
+                        sorry, i'm drawing a 'blank' here trying to figure out what you wanna add
                     </div>
                 ) : null }
                 <input 
@@ -89,10 +133,16 @@ export default class Todo extends Component {
                     name="addValue"
                     value={this.state.addValue}
                 /> {" "}
-                <button onClick={this.handleAddNewTodo}>Add</button>
+                <button onClick={this.handleAddTodo}>Add</button>
                 
+                {showNoTodosMessage ? (
+                    <div style={{marginTop: "10px"}}>
+                        looks like you have nothing 'to do' today. sure you wanna keep it like that?
+                    </div>
+                ) : null}
                 <TodoView
                     todoList = {todoList}
+                    handleDeleteTodo = {this.handleDeleteTodo}
                 />
             </div>
         )
