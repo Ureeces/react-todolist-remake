@@ -9,7 +9,7 @@ const TodoView = ({ todoList }) => {
             {todoList.map(({ id, todo }) => {
                 return (
                 <li key={id}>
-                    {todo}
+                    <span>{todo}</span>
                     <span className="todo-button edit-button">Edit</span>
                     <span className="todo-button delete-button">Delete</span>
                 </li>

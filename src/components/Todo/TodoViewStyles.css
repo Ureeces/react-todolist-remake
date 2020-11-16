@@ -12,23 +12,27 @@ input {
 
 .todo-button {
     margin: 10px;
-    padding: 5px;
+    padding: 8px 10px;
     color: white;
     cursor: pointer;
 }
 
 .edit-button {
-    background-color: blue;
+    border: solid 1px dodgerblue;
+    color: dodgerblue
 }
 
 .edit-button:hover {
-    background-color: lightskyblue;
+    border: solid 1px yellow;
+    color: yellow;
 }
 
 .delete-button {
-    background-color: red;
+    border: solid 1px darkorange;
+    color: darkorange;
 }
 
 .delete-button:hover {
-    background-color: orange;
+    border: solid 1px yellow;
+    color: yellow;
 }

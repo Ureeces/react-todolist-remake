@@ -1,7 +1,13 @@
+@font-face {
+  font-family: comic-sans-ut;
+  src: url(./assets/fonts/Comic\ Sans\ UT.ttf);
+}
+
 body {
   background-color: black;
   color: white;
   font-size: 15pt;
+  font-family: comic-sans-ut;
 }
 
 div {
