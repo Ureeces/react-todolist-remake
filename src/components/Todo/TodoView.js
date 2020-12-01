@@ -1,5 +1,6 @@
 import React from "react";
 import { arrayOf, shape, number, string } from "prop-types";
+import Span from "../shared/Span";
 
 import "./TodoViewStyles.css";
 
@@ -29,30 +30,50 @@ const TodoView = ({
                     )}
                     
                     {isEditing ? (
-                        <span
+                        // <span
+                        //     className={`todo-button edit-button`}
+                        //     onClick={() => handleUpdateTodo()}
+                        // >Update
+                        // </span>
+                        <Span
+                            value={"Update"}
+                            onClick={handleUpdateTodo}
                             className={`todo-button edit-button`}
-                            onClick={() => handleUpdateTodo()}
-                        >Update
-                        </span>
+                        />
                     ) : (
-                        <span 
-                            className={`todo-button edit-button 
-                                ${disableButtons ? "disabled" : ""}`}
-                            onClick={() => handleEditTodo(id)}
-                        >Edit
-                        </span>
+                        // <span 
+                        //     className={`todo-button edit-button 
+                        //         ${disableButtons ? "disabled" : ""}`}
+                        //     onClick={() => handleEditTodo(id)}
+                        // >Edit
+                        // </span>
+                        <Span
+                            value={"Edit"}
+                            id={id}
+                            onClick={handleEditTodo}
+                            className={`todo-button edit-button`}
+                            disabledClass={"disabled"}
+                            disabledButton={disableButtons}
+                        />
                     )}
 
                     
-                    <span 
+                    {/* <span 
                         className={`todo-button delete-button 
                             ${disableButtons ? "disabled" : ""}`} 
                         onClick={() => handleDeleteTodo(id)}
                     >Delete
-                    </span>
+                    </span> */}
+                    <Span
+                        value={"Delete"}
+                        id={id}
+                        onClick={handleDeleteTodo}
+                        className={`todo-button delete-button`}
+                        disabledClass={"disabled"}
+                        disabledButton={disableButtons}
+                    />
                 </li>
                 )
-
             })}
         </ul>
     )
